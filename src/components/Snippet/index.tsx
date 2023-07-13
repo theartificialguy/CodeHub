@@ -29,7 +29,7 @@ export default function Snippet({
   const createShareableLink = async () => {
     try {
       await navigator.clipboard.writeText(
-        `${location.hostname}:3000/share/${snippetId}`
+        `${location.hostname}/share/${snippetId}` // add :3000 for dev
       );
       toast("Link Copied", {
         autoClose: 3000,
