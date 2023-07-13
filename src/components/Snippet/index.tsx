@@ -26,6 +26,21 @@ export default function Snippet({
     (state) => state
   );
 
+  const createShareableLink = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `${location.hostname}:3000/share/${snippetId}`
+      );
+      toast("Link Copied", {
+        autoClose: 3000,
+        type: "success",
+        position: "top-center",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onEditClicked = () => {
     setMode("edit");
     setSelectedSnippetId(snippetId);
@@ -34,18 +49,17 @@ export default function Snippet({
 
   const onDeleteClicked = async () => {
     if (!user) return;
-    try {
-      await deleteSnippet(user.uid, snippetId);
+    const res = await deleteSnippet(snippetId);
+    if (res) {
       toast("Snippet Deleted", {
         autoClose: 3000,
-        type: "error",
+        type: "success",
         position: "top-center",
       });
-    } catch (error) {
-      console.log(error);
+    } else {
       toast("Something went wrong", {
         autoClose: 3000,
-        type: "error",
+        type: "success",
         position: "top-center",
       });
     }
@@ -75,7 +89,7 @@ export default function Snippet({
             </div>
             <div
               onClick={onDeleteClicked}
-              className="rounded-full bg-[#ffe2e2] p-2"
+              className="cursor-pointer rounded-full bg-[#ffe2e2] p-2"
             >
               <MdOutlineDeleteForever color="#d33131" size={20} />
             </div>
@@ -101,7 +115,7 @@ export default function Snippet({
         <div className="rounded-full border bg-[#EEEEEE] px-3">
           <span className="text-sm font-normal text-slate-600">Public</span>
         </div>
-        <div>
+        <div className="cursor-pointer" onClick={createShareableLink}>
           <FiShare color="#4f4d4d" size={20} />
         </div>
       </div>

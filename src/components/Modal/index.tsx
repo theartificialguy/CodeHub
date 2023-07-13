@@ -66,7 +66,7 @@ const CustomModal = () => {
       // fetch snippet data and set states
       const fetchSnippetData = async () => {
         if (user) {
-          const response = await getSnippet(user.uid, selectedSnippetId);
+          const response = await getSnippet(selectedSnippetId);
           if (response) {
             setCode(JSON.parse(response.code));
             setExtension(response.extension);
@@ -91,40 +91,49 @@ const CustomModal = () => {
     if (!user) return;
     if (mode === "edit" && !selectedSnippetId) return;
     if (isSaving.current) return;
-    try {
-      isSaving.current = true;
-      setLoading(true);
-      if (mode === "edit" && selectedSnippetId) {
-        await updateSnippet(user?.uid, selectedSnippetId, code, description);
+
+    isSaving.current = true;
+    setLoading(true);
+
+    if (mode === "edit" && selectedSnippetId) {
+      const res = await updateSnippet(selectedSnippetId, code, description);
+      if (res) {
         toast("Snippet Updated", {
           autoClose: 3000,
           type: "success",
           position: "top-center",
         });
-      } else if (mode === "create") {
-        await addSnippet(user?.uid, code, description, extension);
+      } else {
+        toast("Something went wrong", {
+          autoClose: 3000,
+          type: "error",
+          position: "top-center",
+        });
+      }
+    } else if (mode === "create") {
+      const res = await addSnippet(user?.uid, code, description, extension);
+      if (res) {
         toast("Snippet Added", {
           autoClose: 3000,
           type: "success",
           position: "top-center",
         });
+      } else {
+        toast("Something went wrong", {
+          autoClose: 3000,
+          type: "success",
+          position: "top-center",
+        });
       }
-    } catch (error) {
-      console.log(error);
-      toast("Something went wrong", {
-        autoClose: 3000,
-        type: "error",
-        position: "top-center",
-      });
-    } finally {
-      setLoading(false);
-      isSaving.current = false;
-      setCode("");
-      setExtension("javascript");
-      setDescription("");
-      setSelectedSnippetId(null);
-      isVisible && setVisible(false);
     }
+
+    setLoading(false);
+    isSaving.current = false;
+    setCode("");
+    setExtension("javascript");
+    setDescription("");
+    setSelectedSnippetId(null);
+    isVisible && setVisible(false);
   };
 
   const closeModal = () => {
@@ -184,7 +193,7 @@ const CustomModal = () => {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <div className="h-80 w-full overflow-auto bg-[#282828]">
+          <div className="h-80 w-full overflow-auto rounded-md bg-[#282828]">
             <CodeMirror
               value={code}
               theme={vscodeDark}

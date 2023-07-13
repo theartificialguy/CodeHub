@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  query,
+  where,
+  orderBy,
+  collection,
+  onSnapshot,
+} from "firebase/firestore";
 
 import { db } from "@/firebase/config";
 import useAuthStore from "@/store/useAuthStore";
@@ -22,7 +28,11 @@ export default function SnippetsContainer() {
 
   useEffect(() => {
     const unsub = onSnapshot(
-      collection(db, `users/${user?.uid}/snippets`),
+      query(
+        collection(db, "snippets"),
+        where("userId", "==", user?.uid),
+        orderBy("created_at", "desc")
+      ),
       (snapshot) => {
         if (!snapshot.empty) {
           const docData = snapshot.docs.map((doc) => ({

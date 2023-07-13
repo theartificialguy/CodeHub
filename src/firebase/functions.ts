@@ -19,22 +19,25 @@ export const addSnippet = async (
   ext: string
 ) => {
   try {
-    const ref = collection(db, `users/${userId}/snippets`);
+    const ref = collection(db, 'snippets');
     await addDoc(ref, {
+      userId,
       extension: ext,
       description: desc,
       code: JSON.stringify(code),
       created_at: serverTimestamp(),
       updated_at: null,
     });
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
-export const getSnippet = async (userId: string, snippedId: string) => {
+export const getSnippet = async (snippetId: string) => {
   try {
-    const ref = doc(db, `users/${userId}/snippets/${snippedId}`);
+    const ref = doc(db, `snippets/${snippetId}`);
     const data = await getDoc(ref);
     return data.exists() ? { id: data.id, ...data.data() } as ISnippet : null;
   } catch (error) {
@@ -56,28 +59,31 @@ export const getSnippets = async (userId: string) => {
 };
 
 export const updateSnippet = async (
-  userId: string,
   snippetDocId: string,
   code: string,
   desc: string
 ) => {
   try {
-    const ref = doc(db, `users/${userId}/snippets/${snippetDocId}`);
+    const ref = doc(db, `snippets/${snippetDocId}`);
     await updateDoc(ref, {
       description: desc,
       code: JSON.stringify(code),
       updated_at: serverTimestamp(),
     });
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
-export const deleteSnippet = async (userId: string, snippetDocId: string) => {
+export const deleteSnippet = async (snippetDocId: string) => {
   try {
-    const ref = doc(db, `users/${userId}/snippets/${snippetDocId}`);
+    const ref = doc(db, `snippets/${snippetDocId}`);
     await deleteDoc(ref);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };

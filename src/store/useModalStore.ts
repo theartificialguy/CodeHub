@@ -15,7 +15,7 @@ const useModalStore = create<IModal>((set) => ({
     mode: 'create',
     isVisible: false,
     selectedSnippetId: null,
-    setSelectedSnippetId: (snippedId) => set({ selectedSnippetId: snippedId }),
+    setSelectedSnippetId: (snippetId) => set({ selectedSnippetId: snippetId }),
     setMode: (mode) => set({ mode }),
     setVisible: (value) => set(() => ({ isVisible: value })),
 }));
