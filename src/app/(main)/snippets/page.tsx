@@ -6,7 +6,7 @@ import SnippetsContainer from '@/components/SnippetsContainer';
 
 export default function Snippets() {
   return (
-    <div className='bg-[#f8f8f8] h-screen'>
+    <div className='flex flex-col'>
       <div className="flex items-center justify-between px-6 py-2">
         <div className="space-y-1">
           <h2 className="text-3xl font-semibold text-slate-600">

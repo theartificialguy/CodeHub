@@ -17,7 +17,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     const unsub = onAuthStateChanged(auth, async (result) => {
       if (result) {
         setUser(result);
-        router.push("/home");
+        router.push("/snippets");
       } else {
         setUser(null);
         router.push("/signin");

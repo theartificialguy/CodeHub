@@ -68,7 +68,7 @@ export default function Snippet({
   return (
     <div
       className="
-            h-54 m-2 flex w-4/5 transform flex-col justify-between
+            h-54 m-2 flex w-4/5 transform flex-col justify-between border border-slate-200
             rounded-lg bg-[#FFFFFF] p-2 shadow-sm md:h-60 md:w-64 lg:w-96
         "
     >

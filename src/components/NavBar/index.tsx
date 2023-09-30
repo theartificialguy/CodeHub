@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Dropdown } from "flowbite-react";
 import { IoNotifications } from "react-icons/io5";
 import { HiCog, HiLogout, HiViewGrid } from "react-icons/hi";
+import { MdOutlineAddCircleOutline } from "react-icons/md";
 
 import SearchInput from "../SearchInput";
 import useModalStore from "@/store/useModalStore";
@@ -27,15 +28,16 @@ export default function NavBar() {
         {/* add new snippet button */}
         <button
           onClick={() => {
-            setMode('create');
+            setMode("create");
             setVisible(true);
           }}
           className="
-            rounded-md bg-[#304DFF] border border-blue-600 p-2 text-sm font-normal text-slate-50
-            hover:border hover:border-gray-800 hover:bg-[#eeee] hover:text-slate-700
-          "
+            flex items-center justify-center space-x-2 rounded-md border border-blue-600 bg-[#304DFF] p-2 text-sm font-normal text-slate-50
+              hover:border hover:border-gray-800 hover:bg-[#eeee] hover:text-slate-700
+            "
         >
-          + Add new snippet
+          <MdOutlineAddCircleOutline />
+          <span>Add new snippet</span>
         </button>
         {/* notification icon */}
         <div className="rounded-md bg-slate-100 p-2">
