@@ -1,26 +1,24 @@
 "use client";
-
 import React from "react";
 
 import { toast } from "react-toastify";
 import { FiShare } from "react-icons/fi";
 import { MdOutlineDeleteForever, MdOutlineEdit } from "react-icons/md";
 
+import dayjs from "@/utility/dayjs";
 import useModalStore from "@/store/useModalStore";
 import { deleteSnippet } from "@/firebase/functions";
 import useAuthStore from "@/store/useAuthStore";
-
-interface ISnippet {
-  snippetId: string;
-  extension: string;
-  description: string;
-}
+import { ISnippet } from "@/types";
 
 export default function Snippet({
+  id,
   extension,
   description,
-  snippetId,
+  created_at,
+  updated_at,
 }: ISnippet) {
+
   const user = useAuthStore((state) => state.user);
   const { setMode, setVisible, setSelectedSnippetId } = useModalStore(
     (state) => state
@@ -29,7 +27,7 @@ export default function Snippet({
   const createShareableLink = async () => {
     try {
       await navigator.clipboard.writeText(
-        `${location.hostname}/share/${snippetId}` // add :3000 for dev
+        `${location.hostname}/share/${id}` // add :3000 for dev
       );
       toast("Link Copied", {
         autoClose: 3000,
@@ -43,13 +41,13 @@ export default function Snippet({
 
   const onEditClicked = () => {
     setMode("edit");
-    setSelectedSnippetId(snippetId);
+    setSelectedSnippetId(id);
     setVisible(true);
   };
 
   const onDeleteClicked = async () => {
     if (!user) return;
-    const res = await deleteSnippet(snippetId);
+    const res = await deleteSnippet(id);
     if (res) {
       toast("Snippet Deleted", {
         autoClose: 3000,
@@ -68,8 +66,8 @@ export default function Snippet({
   return (
     <div
       className="
-            h-54 m-2 flex w-4/5 transform flex-col justify-between border border-slate-200
-            rounded-lg bg-[#FFFFFF] p-2 shadow-sm md:h-60 md:w-64 lg:w-96
+            h-54 m-2 flex w-4/5 transform flex-col justify-between rounded-lg border
+            border-slate-200 bg-[#FFFFFF] p-2 shadow-sm md:h-60 md:w-64 lg:w-96
         "
     >
       <div className="space-y-3">
@@ -101,12 +99,16 @@ export default function Snippet({
             {description}
           </p>
           <div className="flex flex-row items-center space-x-6">
-            <span className="text-sm font-light text-slate-400">
-              2 days ago
+            <span className="text-xs font-light text-slate-400">
+              {/* @ts-ignore */}
+              created {dayjs(created_at.toDate()).fromNow()}
             </span>
-            <span className="text-sm font-light text-slate-400">
-              • updated just now
-            </span>
+            {updated_at && (
+              <span className="text-xs font-light text-slate-400">
+                {/* @ts-ignore */}• updated{" "}
+                {dayjs(updated_at.toDate()).fromNow()}
+              </span>
+            )}
           </div>
         </div>
       </div>

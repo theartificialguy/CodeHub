@@ -10,7 +10,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import { ISnippet } from "@/components/SnippetsContainer";
+import { ISnippet } from "@/types";
 
 export const addSnippet = async (
   userId: string,

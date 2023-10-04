@@ -40,22 +40,20 @@ const useAuthStore = create<IAuth>((set) => ({
           merge: true,
         }
       );
-
-      return set(() => ({ user: result.user }));
+      set(() => ({ user: result.user }));
     } catch (error) {
       console.log(error);
-      return set((state) => ({ user: state.user }));
+      set((state) => ({ user: state.user }));
     }
   },
   signOut: async () => {
     try {
       await auth.signOut();
-      return set(() => ({
+      set(() => ({
         user: null,
       }));
     } catch (error) {
-      console.log(error);
-      return set((state) => ({ user: state.user }));
+      set((state) => ({ user: state.user }));
     }
   },
 }));
