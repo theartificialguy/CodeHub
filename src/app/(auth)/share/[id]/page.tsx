@@ -12,8 +12,8 @@ import { java } from "@codemirror/lang-java";
 import { cpp } from "@codemirror/lang-cpp";
 import { php } from "@codemirror/lang-php";
 
-import { ISnippet } from "@/components/SnippetsContainer";
 import { getSnippet } from "@/firebase/functions";
+import { ISnippet } from "@/types";
 
 interface IExtension {
   [key: string]: LanguageSupport;
@@ -46,7 +46,7 @@ export default function ShareableSnippet({
 
   useEffect(() => {
     router.push(`/share/${params.id}`);
-  }, []);
+  }, [router, params.id]);
 
   useEffect(() => {
     const fetchSnippetData = async () => {

@@ -77,7 +77,7 @@ const CustomModal = () => {
 
       fetchSnippetData();
     }
-  }, [mode, selectedSnippetId]);
+  }, [mode, selectedSnippetId, user]);
 
   const onChange = useCallback((value: string) => {
     setCode(value);

@@ -26,7 +26,8 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     });
 
     return () => unsub();
-  }, [user]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, router]);
 
   if (loading) {
     return null;

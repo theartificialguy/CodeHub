@@ -48,7 +48,7 @@ export default function SnippetsContainer() {
     );
 
     return () => unsub();
-  }, []);
+  }, [user?.uid]);
 
   useEffect(() => {
     if (debouncedSearchInput) {
@@ -60,7 +60,7 @@ export default function SnippetsContainer() {
     } else {
       setFilteredSnippets([]);
     }
-  }, [debouncedSearchInput]);
+  }, [debouncedSearchInput, snippets]);
 
   if (loading) {
     return (
@@ -98,8 +98,8 @@ export default function SnippetsContainer() {
       <div className="ml-4 flex flex-wrap">
         {/* snippet */}
         {input.length > 0
-          ? filteredSnippets.map((snippet) => <Snippet {...snippet} />)
-          : snippets.map((snippet) => <Snippet {...snippet} />)}
+          ? filteredSnippets.map((snippet) => <Snippet key={snippet.id} {...snippet} />)
+          : snippets.map((snippet) => <Snippet key={snippet.id} {...snippet} />)}
       </div>
     </div>
   );
