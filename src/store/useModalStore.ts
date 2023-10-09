@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type ModalMode = 'edit' | 'create';
+type ModalMode = 'view' | 'edit' | 'create';
 
 interface IModal {
     selectedSnippetId: string | null;

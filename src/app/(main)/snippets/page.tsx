@@ -36,17 +36,17 @@ export default function Snippets() {
         <div className="flex items-center space-x-4">
           <button
             onClick={handleFilter}
-            className="flex cursor-pointer items-center space-x-1 rounded-md bg-[#e6e6e6] px-2 py-1"
+            className="flex cursor-pointer items-center space-x-1 rounded-md bg-[#f0f0f0] px-2 py-1"
           >
-            <span className="text-sm font-normal text-slate-700">Filter</span>
-            <BiFilterAlt size={14} color="black" />
+            <span className="text-sm font-normal text-slate-600">Filter</span>
+            <BiFilterAlt size={14} color="gray" />
           </button>
           <button
             onClick={handleSort}
-            className="flex cursor-pointer items-center space-x-1 rounded-md bg-[#e6e6e6] px-2 py-1"
+            className="flex cursor-pointer items-center space-x-1 rounded-md bg-[#f0f0f0] px-2 py-1"
           >
-            <span className="text-sm font-normal text-slate-700">Sort by</span>
-            <BiSortDown size={14} color="black" />
+            <span className="text-sm font-normal text-slate-600">Sort by</span>
+            <BiSortDown size={14} color="gray" />
           </button>
         </div>
       </div>

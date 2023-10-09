@@ -75,9 +75,10 @@ export default function ShareableSnippet({
           </p>
           <div className="h-full overflow-auto rounded-md bg-[#282828]">
             <CodeMirror
-              value={JSON.parse(snippet.code)}
+              editable={false}
               theme={vscodeDark}
               style={{ fontSize: 16 }}
+              value={JSON.parse(snippet.code)}
               extensions={[extentions[snippet.extension]]}
             />
           </div>

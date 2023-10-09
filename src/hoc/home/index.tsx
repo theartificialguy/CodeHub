@@ -13,7 +13,7 @@ export default function HomeWrapper({
   return (
     <div className="flex min-h-screen w-full">
       <SideBar />
-      <div className="w-full">
+      <div className="w-full ml-60">
         <NavBar />
         {children}
         <SnippetModal />

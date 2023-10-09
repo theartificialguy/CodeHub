@@ -166,8 +166,8 @@ const CustomModal = () => {
             </span>
             <select
               key={"extensions"}
-              defaultValue={extension}
               value={extension}
+              defaultValue={extension}
               disabled={mode === "edit"}
               onChange={(event) => setExtension(event.target.value)}
               className="rounded-lg border-gray-600 bg-[#444444] p-1 px-2 text-sm text-white"

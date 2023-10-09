@@ -3,7 +3,7 @@ import Section from "./components/Section";
 
 export default function SideBar() {
   return (
-    <div className="relative flex min-h-screen w-1/6 flex-col items-center border-r border-slate-100 bg-white py-6">
+    <div className="fixed min-h-screen flex w-60 flex-col items-center border-r border-slate-100 bg-white py-6">
       {/* webapp name */}
       <div className="flex items-center space-x-1 rounded-md bg-[#304DFF] px-4 py-1">
         <span className="text-xl font-semibold text-slate-100">CodeHub</span>
@@ -18,10 +18,10 @@ export default function SideBar() {
       </div>
       {/* status */}
       <div className="absolute bottom-10">
-        <div className="flex space-x-2 items-center">
+        <div className="flex items-center space-x-2">
           <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-400"></span>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-green-400"></span>
           </span>
           <span className="text-sm font-medium text-black/75">
             Work in progress

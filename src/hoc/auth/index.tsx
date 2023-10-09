@@ -17,10 +17,10 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     const unsub = onAuthStateChanged(auth, async (result) => {
       if (result) {
         setUser(result);
-        router.push("/snippets");
+        router.replace("/snippets");
       } else {
         setUser(null);
-        router.push("/signin");
+        router.replace("/signin");
       }
       setLoading(false);
     });
@@ -33,5 +33,5 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  return <>{children}</>;
+  return children;
 }
