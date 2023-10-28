@@ -2,11 +2,10 @@
 import React from "react";
 
 import { toast } from "react-toastify";
-import { BiFilterAlt, BiSortDown } from "react-icons/bi";
+// import { BiFilterAlt, BiSortDown } from "react-icons/bi";
 
 import SnippetsContainer from "@/components/SnippetsContainer";
 import useUtils from "@/store/useUtils";
-import { Dropdown } from "flowbite-react";
 import { SORT_TYPES } from "@/types";
 
 export default function Snippets() {
@@ -26,7 +25,7 @@ export default function Snippets() {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full space-y-6">
       <div className="flex items-center justify-between px-6 py-2">
         <div className="space-y-1">
           <h2 className="text-3xl font-semibold text-slate-600">My snippets</h2>

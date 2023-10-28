@@ -102,7 +102,7 @@ export default function SnippetsContainer() {
 
   return (
     // <div className="my-8 flow-root">
-      <div className="ml-4 flex flex-wrap">
+      <div className="flex flex-col items-center md:flex-wrap md:flex-row">
         {/* snippet */}
         {input.length > 0
           ? filteredSnippets.map((snippet) => <Snippet key={snippet.id} {...snippet} />)

@@ -41,9 +41,9 @@ export default function NavBar() {
           <span>Add new snippet</span>
         </button>
         {/* notification icon */}
-        <div className="rounded-md bg-slate-100 p-2">
+        {/* <div className="rounded-md bg-slate-100 p-2">
           <IoNotifications color="gray" size={20} />
-        </div>
+        </div> */}
         {/* profile dropdown menu */}
         <Dropdown
           headerTitle={user?.displayName ?? "Unkown User"}
