@@ -3,9 +3,9 @@ import Section from "./components/Section";
 
 export default function SideBar() {
   return (
-    <div className="fixed min-h-screen flex w-60 flex-col items-center border-r border-slate-100 bg-white py-6">
+    <div className="fixed hidden min-h-screen flex-col items-center border-r border-slate-100 bg-white py-12 lg:flex lg:w-60">
       {/* webapp name */}
-      <div className="flex items-center space-x-1 rounded-md bg-[#304DFF] px-4 py-1">
+      <div className="rounded-md bg-[#304DFF] px-4 py-1">
         <span className="text-xl font-semibold text-slate-100">CodeHub</span>
       </div>
       {/* sections */}

@@ -2,7 +2,7 @@ import React from "react";
 
 import { BiSearchAlt2 } from "react-icons/bi";
 
-import useInputStore from "@/store/useInputStore";
+import useInputStore from "@/store/useUtils";
 
 export default function SearchInput() {
 

@@ -10,16 +10,17 @@ import {
 import { HashLoader } from "react-spinners";
 
 import { db } from "@/firebase/config";
+import useUtils from "@/store/useUtils";
 import useAuthStore from "@/store/useAuthStore";
 import useModalStore from "@/store/useModalStore";
-import useInputStore from "@/store/useInputStore";
 import useDebounce from "@/hooks/useDebounce";
 import { ISnippet } from "@/types";
 import Snippet from "../Snippet";
 
 export default function SnippetsContainer() {
   const user = useAuthStore((state) => state.user);
-  const input = useInputStore((state) => state.input);
+  const input = useUtils((state) => state.input);
+  // const sortBy = useUtils((state) => state.sortBy);
   const setMode = useModalStore((state) => state.setMode);
   const setVisible = useModalStore((state) => state.setVisible);
   const [loading, setLoading] = useState<boolean>(true);
@@ -63,6 +64,11 @@ export default function SnippetsContainer() {
     }
   }, [debouncedSearchInput, snippets]);
 
+  // handle sort
+  // useEffect(() => {
+
+  // }, [sortBy]);
+
   if (loading) {
     return (
       <div className="relative h-[600px] w-[calc(100%)]">
@@ -95,13 +101,13 @@ export default function SnippetsContainer() {
   }
 
   return (
-    <div className="my-8 flow-root">
+    // <div className="my-8 flow-root">
       <div className="ml-4 flex flex-wrap">
         {/* snippet */}
         {input.length > 0
           ? filteredSnippets.map((snippet) => <Snippet key={snippet.id} {...snippet} />)
           : snippets.map((snippet) => <Snippet key={snippet.id} {...snippet} />)}
       </div>
-    </div>
+    // </div>
   );
 }

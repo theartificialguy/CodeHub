@@ -1,12 +1,11 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 
-import { Dropdown } from "flowbite-react";
+import { HiLogout } from "react-icons/hi";
 import { IoNotifications } from "react-icons/io5";
-import { HiCog, HiLogout, HiViewGrid } from "react-icons/hi";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 
+import Dropdown from "../Dropdown";
 import SearchInput from "../SearchInput";
 import useModalStore from "@/store/useModalStore";
 import useAuthStore from "@/store/useAuthStore";
@@ -18,6 +17,8 @@ export default function NavBar() {
   const setVisible = useModalStore((state) => state.setVisible);
 
   const onSignOutClick = async () => {
+    const answer = window.confirm("Are you sure you want to logout?");
+    if (!answer) return;
     await signOut();
   };
 
@@ -44,40 +45,31 @@ export default function NavBar() {
           <IoNotifications color="gray" size={20} />
         </div>
         {/* profile dropdown menu */}
-        <div>
-          <Dropdown
-            label
-            renderTrigger={() => (
-              <Image
-                width={40}
-                height={40}
-                quality={80}
-                alt="user profile image"
-                className="cursor-pointer rounded-full"
-                onError={(e) => console.log("failed")}
-                src={
-                  user?.photoURL ??
-                  "https://api.dicebear.com/6.x/pixel-art/png?seed=Jane&flip=true"
-                }
-              />
-            )}
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">
-                {user?.displayName ?? "Unkown User"}
-              </span>
-              <span className="block truncate text-sm font-medium">
-                {user?.email ?? "Unkown Email"}
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item icon={HiViewGrid}>Dashboard</Dropdown.Item>
-            <Dropdown.Item icon={HiCog}>Settings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item icon={HiLogout} onClick={onSignOutClick}>
-              Sign out
-            </Dropdown.Item>
-          </Dropdown>
-        </div>
+        <Dropdown
+          headerTitle={user?.displayName ?? "Unkown User"}
+          headerSubTitle={user?.email ?? "Unkown Email"}
+          triggerComponent={
+            <Image
+              width={40}
+              height={40}
+              quality={80}
+              alt="user profile image"
+              className="cursor-pointer rounded-full"
+              onError={(e) => console.log("failed")}
+              src={
+                user?.photoURL ??
+                "https://api.dicebear.com/6.x/pixel-art/png?seed=Jane&flip=true"
+              }
+            />
+          }
+          dropdownOptions={[
+            {
+              title: "Sign out",
+              onClick: onSignOutClick,
+              icon: <HiLogout color="#fa5c5c" />,
+            },
+          ]}
+        />
       </div>
     </nav>
   );

@@ -8,3 +8,5 @@ export interface ISnippet {
   created_at: Timestamp;
   updated_at: Timestamp;
 }
+
+export type SORT_TYPES = "CA-ASC" | "CA-DESC" | "UA-ASC" | "UA-DESC";

@@ -40,8 +40,9 @@ export default function Snippet({
   };
 
   const onViewClicked = () => {
-    // setMode("view");
-    // setVisible(true);
+    setMode("view");
+    setSelectedSnippetId(id);
+    setVisible(true);
   };
 
   const onEditClicked = () => {
@@ -137,7 +138,7 @@ export default function Snippet({
         <div className="rounded-full border bg-[#EEEEEE] px-3">
           <span className="text-sm font-normal text-slate-600">Public</span>
         </div>
-        <div className="cursor-pointer" onClick={createShareableLink}>
+        <div title="share" className="cursor-pointer" onClick={createShareableLink}>
           <FiShare color="#4f4d4d" size={20} />
         </div>
       </div>

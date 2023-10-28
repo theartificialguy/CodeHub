@@ -62,7 +62,7 @@ const CustomModal = () => {
   );
 
   useEffect(() => {
-    if (mode === "edit" && selectedSnippetId) {
+    if ((mode === "edit" || mode === "view") && selectedSnippetId) {
       // fetch snippet data and set states
       const fetchSnippetData = async () => {
         if (user) {
@@ -160,37 +160,41 @@ const CustomModal = () => {
             },
           }}
         >
-          <div className="flex flex-row items-center space-x-4">
-            <span className="text-[#dddddd]">
-              {mode === "edit" ? "Update Snippet" : "Add your Snippet"}
-            </span>
-            <select
-              key={"extensions"}
-              value={extension}
-              defaultValue={extension}
-              disabled={mode === "edit"}
-              onChange={(event) => setExtension(event.target.value)}
-              className="rounded-lg border-gray-600 bg-[#444444] p-1 px-2 text-sm text-white"
-            >
-              <option value="javascript">js</option>
-              <option value="python">py</option>
-              <option value="html">html</option>
-              <option value="cpp">cpp</option>
-              <option value="java">java</option>
-              <option value="php">php</option>
-            </select>
-            <select
-              key={"fontsizes"}
-              defaultValue={fontSize}
-              onChange={(event) => setFontSize(event.target.value)}
-              className="rounded-lg border-gray-600 bg-[#444444] p-1 px-2 text-sm text-white"
-            >
-              <option value="12px">12px</option>
-              <option value="14px">14px</option>
-              <option value="16px">16px</option>
-              <option value="18px">18px</option>
-            </select>
-          </div>
+          {mode === "view" ? (
+            <h1 className="text-white font-semibold">Your code snippet</h1>
+          ) : (
+            <div className="flex flex-row items-center space-x-4">
+              <span className="text-[#dddddd]">
+                {mode === "edit" ? "Update Snippet" : "Add your Snippet"}
+              </span>
+              <select
+                key={"extensions"}
+                value={extension}
+                defaultValue={extension}
+                disabled={mode === "edit"}
+                onChange={(event) => setExtension(event.target.value)}
+                className="rounded-lg border-gray-600 bg-[#444444] p-1 px-2 text-sm text-white"
+              >
+                <option value="javascript">js</option>
+                <option value="python">py</option>
+                <option value="html">html</option>
+                <option value="cpp">cpp</option>
+                <option value="java">java</option>
+                <option value="php">php</option>
+              </select>
+              <select
+                key={"fontsizes"}
+                defaultValue={fontSize}
+                onChange={(event) => setFontSize(event.target.value)}
+                className="rounded-lg border-gray-600 bg-[#444444] p-1 px-2 text-sm text-white"
+              >
+                <option value="12px">12px</option>
+                <option value="14px">14px</option>
+                <option value="16px">16px</option>
+                <option value="18px">18px</option>
+              </select>
+            </div>
+          )}
         </Modal.Header>
         <Modal.Body>
           <div className="h-80 w-full overflow-auto rounded-md bg-[#282828]">
@@ -204,30 +208,34 @@ const CustomModal = () => {
           </div>
         </Modal.Body>
         <Modal.Footer className="border-[#444444]">
-          <div className="flex w-full flex-row items-center space-x-4">
-            <button
-              onClick={onSubmit}
-              className="flex items-center justify-center rounded-md bg-[#304DFF] px-4 py-2 text-sm font-normal text-slate-50"
-            >
-              {loading ? (
-                <ClipLoader color="#eeeeee" size={18} />
-              ) : mode === "edit" ? (
-                "update"
-              ) : (
-                "save"
-              )}
-            </button>
-            <input
-              type="text"
-              value={description}
-              onChange={onChangeDescription}
-              className="
+          {mode === "view" ? (
+            <p className="text-white/75 font-normal text-base">{description}</p>
+          ) : (
+            <div className="flex w-full flex-row items-center space-x-4">
+              <button
+                onClick={onSubmit}
+                className="flex items-center justify-center rounded-md bg-[#304DFF] px-4 py-2 text-sm font-normal text-slate-50"
+              >
+                {loading ? (
+                  <ClipLoader color="#eeeeee" size={18} />
+                ) : mode === "edit" ? (
+                  "update"
+                ) : (
+                  "save"
+                )}
+              </button>
+              <input
+                type="text"
+                value={description}
+                onChange={onChangeDescription}
+                className="
                     w-full rounded-md bg-[#484747] text-sm font-normal text-slate-50 placeholder:text-[#ababab] 
                     focus:border-[#504d4d] focus:ring-[#504d4d]
                 "
-              placeholder="Enter a short description..."
-            />
-          </div>
+                placeholder="Enter a short description..."
+              />
+            </div>
+          )}
         </Modal.Footer>
       </div>
     </Modal>
